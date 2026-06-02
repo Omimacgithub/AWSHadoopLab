@@ -31,7 +31,7 @@ En la interfaz de YARN se muestra la información de estado de los NodeManagers 
 
 **Q: Captura de pantalla del interfaz Web del YARN en la que se muestre que el ejemplo del cálculo de PI ha finalizado con éxito. ¿En qué nodo se ha ejecutado el Application Master? ¿cuántos containers se han reservado?**
 
-<img src="img/3.png" width="800px" height="400px">
+<img src="img/3.png" width="750px" height="400px">
 
 En la interfaz de YARN se muestra información acerca de la ejecución de la aplicación, como el nombre (QuasiMonteCarlo), tipo de aplicación (MapReduce), estado final (succeeded), tiempo transcurrido (35 segundos), entre otra información relevante. En la última tabla se nos muestra el identificador del trabajo e información del tiempo de inicio, el nodo que hizo de ApplicationMaster (uno de los NodeManagers del clúster) y por ende el encargado de la ejecución de la aplicación y los logs.
 
@@ -41,11 +41,11 @@ Si pinchamos en el identificador del trabajo podemos ver más información relac
 
 **Q: Captura de pantalla de la finalización de la ejecución del WordCount y muestra del contenido de un fichero de salida.**
 
-<img src="img/5.png" width="800px" height="400px">
+<img src="img/5.png" width="750px" height="400px">
 
 La salida de la aplicación muestra el progreso de las tareas map y reduce. Al momento de terminar satisfactoriamente el trabajo se imprimen las estadísticas del mismo. Se muestran las estadísticas del HDFS y de las tareas MapReduce. Se pueden ver 15 tareas map, que corresponden al total de ficheros dentro del directorio libros y 4 tareas reduce, que se corresponde con el total de DataNodes del clúster.
 
-<img src="img/6.png" width="800px" height="400px">
+<img src="img/6.png" width="600px" height="400px">
 
 La tarea ha generado 4 ficheros de salida (1 por tarea reduce), cada fichero de salida muestra para cada palabra el número de ocurrencias dentro de los ficheros procesados.
 
@@ -263,15 +263,15 @@ Como se puede apreciar, el almacenamiento de las réplicas se va alternando entr
 
 Terasort
 
-<img src="img/9.png" width="800px" height="400px">
+<img src="img/9.png" width="750px" height="400px">
 
 En esta fase se generan 1 GB de datos aleatorios.
 
-<img src="img/10.png" width="800px" height="400px">
+<img src="img/10.png" width="750px" height="400px">
 
 Esta fase ordena los datos propiamente.
 
-<img src="img/11.png" width="800px" height="400px">
+<img src="img/11.png" width="750px" height="400px">
 
 Por último, teravalidate verifica la correcta ordenación de los datos.
 
@@ -289,7 +289,9 @@ Lectura:
 
 - Average IO rate: 244.9 mb/sec
 
-Tanto el throughput como el IO dan mejores resultados al realizar operaciones de lectura que de escritura. Esto puede deberse al comportamiento del HDFS, ya que al escribir un bloque, los datos deben replicarse x3, por lo que se añade un tiempo extra de copia de los datos y transmisión por la red de esos datos a otros nodos del clúster. Mientras que para una lectura sólo es necesario leer una de las réplicas del bloque (HDFS a conciencia optimizará el acceso a esos datos leyendo el bloque del nodo más cercano, seguramente teniendo en cuenta la distribución de los nodos en los racks). También HDFS debe asegurar la persistencia de los datos, por lo que las escrituras deben de reflejarse en el disco local del worker al finalizar la tarea Map. Posteriormente, el worker que ejecuta la tarea Reduce lee los datos del disco local del worker que ejecutó dicha tarea Map y finalmente se guarda el resultado en el DFS. Todos estos pasos son omitidos por las operaciones de lectura.
+Tanto el throughput como el IO dan mejores resultados al realizar operaciones de lectura que de escritura. Esto puede deberse al comportamiento del HDFS, ya que al escribir un bloque, los datos deben replicarse x3, por lo que se añade un tiempo extra de copia de los datos y transmisión por la red de esos datos a otros nodos del clúster. Mientras que para una lectura sólo es necesario leer una de las réplicas del bloque (HDFS a conciencia optimizará el acceso a esos datos leyendo el bloque del nodo más cercano, seguramente teniendo en cuenta la distribución de los nodos en los racks). 
+
+HDFS debe asegurar la persistencia de los datos, por lo que las escrituras deben de reflejarse en el disco local del worker al finalizar la tarea Map. Posteriormente, el worker que ejecuta la tarea Reduce lee los datos del disco local del worker que ejecutó dicha tarea Map y finalmente se guarda el resultado en el DFS. Todos estos pasos son omitidos por las operaciones de lectura.
 
 **Q: En el interfaz web de YARN, mira la aplicación Terasort una vez que haya terminado y haz una captura de pantalla de la información de la ejecución. ¿Cuánto vale el Elapsed Time?**
 
@@ -323,13 +325,13 @@ Después del backup:
 
 - NNRM:
 
-<img src="img/16.png" width="800px" height="400px">
+<img src="img/16.png" width="400px" height="1000px">
 
 Ahora se muestra una gran cantidad de ficheros edits en el directorio del NameNode,en total los que ya residían en el directorio del NameNode y 1 por cada checkpoint (lo dejé ejecutando varios minutos). Como configuramos el checkpointing cada 10 segundos, los ficheros edits son pequeños y contienen información de 1 única transacción. El resultado es un nuevo fichero edits_inprogress empezando en la transacción siguiente a la última del último fichero edits (1777) y un fsimage en la transacción 1776 (que debería de aparecer). Esto prueba que en cada checkpoint se genera un fsimage con los últimos cambios actualizados.
 
 - BKTL:
 
-<img src="img/17.png" width="800px" height="400px">
+<img src="img/17.png" width="400px" height="1000px">
 
 El nodo BKTL posee los mismos ficheros edits que el nodo NNRM (por la sincronización de la memoria) excepto algunos ficheros edits extra que no tiene el NameNode. Es un hecho curioso, ya que el BKTL realiza los checkpoints en base a los ficheros edits que el NameNode le proporciona.
 
@@ -341,7 +343,7 @@ Antes de hacer checkpointing:
 
 Después de hacer checkpointing:
 
-<img src="img/19.png" width="800px" height="400px">
+<img src="img/19.png" width="400px" height="1000px">
 
 Vemos nuevos ficheros edits resultado de cada checkpoint realizado. Nuevamente, no aparece el fsimage correspondiente a la última transacción del último edits (1776).
 
@@ -378,11 +380,11 @@ Los bloques del fichero grande que se encontraban en el nodo retirado ya no se c
 > [!NOTE]
 > Se ha realizado una nueva ejecución con nuevos nodos
 
-<img src="img/23.png" width="800px" height="400px">
+<img src="img/23.png" width="400px" height="800px">
 
-<img src="img/24.png" width="800px" height="400px">
+<img src="img/24.png" width="400px" height="800px">
 
-<img src="img/25.png" width="800px" height="400px">
+<img src="img/25.png" width="400px" height="800px">
 
 <img src="img/26.png" width="800px" height="400px">
 
@@ -426,19 +428,19 @@ Se muestra como los 6 DataNodes se han distribuido en 3 racks.
 
 **Q: Una captura de pantalla en la que se vea el estado inicial del HDFS (salida del comando hdfs fsck)**
 
-<img src="img/33.png" width="800px" height="400px">
+<img src="img/34.png" width="800px" height="400px">
 
 Hasta este punto el DFS se encuentra estable en cuanto a bloques replicados e integridad de los mismos se refiere.
 
 **Q: Una captura de pantalla con la salida del comando hdfs dfsadmin -report en la que se vea que solo quedan dos DNNM activos así como el número de bloques que tiene cada uno.**
 
-<img src="img/34.png" width="800px" height="400px">
+<img src="img/35.png" width="550px" height="400px">
 
 Se puede observar en la captura que quedan 2 nodos activos, con 22 y 37 bloques respectivamente, cantidad inferior a la que había inicialmente (91 bloques).
 
 **Q: Una captura de pantalla en la que se vea el estado del HDFS después de retirar los nodos**
 
-<img src="img/35.png" width="800px" height="400px">
+<img src="img/36.png" width="800px" height="400px">
 
 **Q: ¿Cuántos bloques aparecen under-replicated?**
 
@@ -448,19 +450,19 @@ Se puede observar en la captura que quedan 2 nodos activos, con 22 y 37 bloques 
 
 hdfs fsck -list-corruptfileblocks
 
-<img src="img/36.png" width="800px" height="400px">
+<img src="img/37.png" width="800px" height="400px">
 
 En total hay 54 bloques corruptos y 3 bloques con factor de replicación 1 perdidos, lo que quiere decir que se ha perdido parte de la información de 1 a máximo 3 ficheros, por lo que esos ficheros están corruptos.
 
 **Q: ¿Cuál es el número de réplicas y la localización de los bloques del fichero_grande? ¿Es posible recuperar el fichero?**
 
-<img src="img/37.png" width="800px" height="400px">
+<img src="img/38.png" width="800px" height="400px">
 
 Los 16 bloques de fichero_grande poseen 2 réplicas en los 2 DataNodes vivos del clúster, si consultamos el estado del archivo con hdfs fsck, nos dice que el fichero se encuentra healthy (no está corrupto).
 
 **Q: Una vez añadido el nuevo DNNM y después de un cierto tiempo ¿Con cuántos bloques se queda el nuevo DNNM? ¿se ha recuperado el factor de replicación medio?**
 
-<img src="img/38.png" width="800px" height="400px">
+<img src="img/39.png" width="800px" height="400px">
 
 El nuevo DNNM posee 16 bloques. El factor de replicación promedio ha vuelto a 3 y ahora ningún bloque se encuentra underreplicated.
 
@@ -468,11 +470,11 @@ El nuevo DNNM posee 16 bloques. El factor de replicación promedio ha vuelto a 3
 
 **Q: Una captura de pantalla que muestre el espacio ocupado antes de mover el fichero.**
 
-<img src="img/39.png" width="800px" height="400px">
+<img src="img/40.png" width="800px" height="400px">
 
 **Q: Una captura de pantalla que muestre el espacio ocupado después de mover el fichero al directorio /user/grandes.**
 
-<img src="img/40.png" width="800px" height="400px">
+<img src="img/41.png" width="800px" height="400px">
 
 Se ha conseguido reducir el espacio en DFS aplicando esta política de EC en más de 1 GB.
 
@@ -480,7 +482,7 @@ Se ha conseguido reducir el espacio en DFS aplicando esta política de EC en má
 
 El fichero está compuesto por 6 bloques con factor de réplica 1. Los 5 DataNodes vivos poseen cada bloque del fichero_grande (5*6=30 bloques en total).
 
-<img src="img/41.png" width="800px" height="400px">
+<img src="img/42.png" width="800px" height="400px">
 
 **Q: ¿A qué se debe esta distribución? ¿cómo funciona la política RS-3-2-1024k?**
 
