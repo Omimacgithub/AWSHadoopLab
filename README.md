@@ -45,7 +45,7 @@ Si pinchamos en el identificador del trabajo podemos ver más información relac
 
 La salida de la aplicación muestra el progreso de las tareas map y reduce. Al momento de terminar satisfactoriamente el trabajo se imprimen las estadísticas del mismo. Se muestran las estadísticas del HDFS y de las tareas MapReduce. Se pueden ver 15 tareas map, que corresponden al total de ficheros dentro del directorio libros y 4 tareas reduce, que se corresponde con el total de DataNodes del clúster.
 
-<img src="img/6.png" width="600px" height="400px">
+<img src="img/6.png" width="400px" height="400px">
 
 La tarea ha generado 4 ficheros de salida (1 por tarea reduce), cada fichero de salida muestra para cada palabra el número de ocurrencias dentro de los ficheros procesados.
 
@@ -428,13 +428,13 @@ Se muestra como los 6 DataNodes se han distribuido en 3 racks.
 
 **Q: Una captura de pantalla en la que se vea el estado inicial del HDFS (salida del comando hdfs fsck)**
 
-<img src="img/34.png" width="800px" height="400px">
+<img src="img/34.png" width="500px" height="500px">
 
 Hasta este punto el DFS se encuentra estable en cuanto a bloques replicados e integridad de los mismos se refiere.
 
 **Q: Una captura de pantalla con la salida del comando hdfs dfsadmin -report en la que se vea que solo quedan dos DNNM activos así como el número de bloques que tiene cada uno.**
 
-<img src="img/35.png" width="550px" height="400px">
+<img src="img/35.png" width="400px" height="1000px">
 
 Se puede observar en la captura que quedan 2 nodos activos, con 22 y 37 bloques respectivamente, cantidad inferior a la que había inicialmente (91 bloques).
 
@@ -472,9 +472,13 @@ El nuevo DNNM posee 16 bloques. El factor de replicación promedio ha vuelto a 3
 
 <img src="img/40.png" width="800px" height="400px">
 
-**Q: Una captura de pantalla que muestre el espacio ocupado después de mover el fichero al directorio /user/grandes.**
+**Q: Una captura de pantalla en la que se muestre la aplicación de la política EC al directorio.**
 
 <img src="img/41.png" width="800px" height="400px">
+
+**Q: Una captura de pantalla que muestre el espacio ocupado después de mover el fichero al directorio /user/grandes.**
+
+<img src="img/42.png" width="800px" height="400px">
 
 Se ha conseguido reducir el espacio en DFS aplicando esta política de EC en más de 1 GB.
 
@@ -482,7 +486,7 @@ Se ha conseguido reducir el espacio en DFS aplicando esta política de EC en má
 
 El fichero está compuesto por 6 bloques con factor de réplica 1. Los 5 DataNodes vivos poseen cada bloque del fichero_grande (5*6=30 bloques en total).
 
-<img src="img/42.png" width="800px" height="400px">
+<img src="img/43.png" width="800px" height="400px">
 
 **Q: ¿A qué se debe esta distribución? ¿cómo funciona la política RS-3-2-1024k?**
 
