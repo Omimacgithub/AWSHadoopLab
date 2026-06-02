@@ -486,7 +486,7 @@ Se ha conseguido reducir el espacio en DFS aplicando esta política de EC en má
 
 El fichero está compuesto por 6 bloques con factor de réplica 1. Los 5 DataNodes vivos poseen cada bloque del fichero_grande (5*6=30 bloques en total).
 
-<img src="img/43.png" width="800px" height="400px">
+<img src="img/43.png" width="600px" height="400px">
 
 **Q: ¿A qué se debe esta distribución? ¿cómo funciona la política RS-3-2-1024k?**
 
