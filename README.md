@@ -14,8 +14,8 @@ Lab for deploying and managing a Hadoop cluster on AWS.
     - [TimeLine](#timeline)
   - [Adding and removing DNNMs](#adding-and-removing-dnnms)
   - [Rack awareness](#rack-awareness)
-  - [File System Check (FSCK)](#file-system-check-(fsck))
-  - [Erasure Coding (EC)](#erasure-coding-(ec))
+  - [File System Check (FSCK)](#file-system-check-fsck)
+  - [Erasure Coding (EC)](#erasure-coding-ec)
 
 ## Cluster deployment
 
