@@ -365,13 +365,22 @@ En este caso se muestra la información relacionada para la aplicación de pi (Q
 
 ### Adding and removing DNNMs
 
+DNNM: DataNode and NodeManager
+
+DataNode: Hadoop worker (store file block data)
+
+NodeManager: YARN worker (launch and manage containers for task execution)
+
+**Both DataNodes and NodeManagers should be on the same machine** (they need direct disk access for minimal latency).
+
+
 **Q: La salida de los comandos hdfs dfsadmin -report y yarn node -list que muestren que el nodo está retirado**
 
 <img src="img/22.png" width="800px" height="400px">
 
 En el hdfs se muestra que el nodo está retirado del servicio (Decommissioned). En yarn el nodo desaparece de la lista de nodos activos.
 
-**Q: Mira lo que ha pasado con los bloques del fichero grande ¿alguno de los bloques tenía una réplica en el DDNM que hemos retirado? ¿dónde se encuentra ahora?**
+**Q: Mira lo que ha pasado con los bloques del fichero grande ¿alguno de los bloques tenía una réplica en el DNNM que hemos retirado? ¿dónde se encuentra ahora?**
 
 Los bloques del fichero grande que se encontraban en el nodo retirado ya no se cuentan como réplica, por lo que se han creado nuevas réplicas de esos bloques y se han movido a los nodos que no tenía ninguna réplica del bloque en cuestión.
 
